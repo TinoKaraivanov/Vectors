@@ -8,13 +8,14 @@ private:
     Vector Vect;
     double t;
     double x,y,z;
-    unsigned lenght;
+    
     
 public:
     Segment();
     Segment(Point&, Vector&, double);
     unsigned segLen();
     unsigned lenSeg(Vector&, Point&);
+    Point segMid(Vector&, Point&);
 };
 
 
