@@ -107,10 +107,11 @@ double Vector::operator()(Vector& v2, Vector& v3) {
 
 
 //Methods
+//Намира дължината на вектор (по формула за корен от сбора на квадратите на трите елемента на вектора)
 double Vector::length() {
     return sqrt((this->x * this->x) + (this->y * this->y) + (this->z * this->z));
 }
-
+//Намиране на посока на Вектор
 Vector Vector::getDirection() {
     if(this->isNull() == true){
         throw VLE();
@@ -124,13 +125,13 @@ Vector Vector::getDirection() {
 
     return Vector(x, y, z);
 }
-
+//проверява, дали векторът е нулев
 bool Vector::isNull() const {
  
     return x ==0 && y ==0 && z ==0;
 }
 
-
+//проверява дали два вектора са паралелни
 bool Vector::paralellismCheck(Vector& v2) {
     Vector& v1 = *this;
 
@@ -139,7 +140,7 @@ if(v2.isNull()||v1.isNull() == true){
 }
     return ((v1.x / v2.x) == (v1.y / v2.y) == (v1.z / v2.z));
 }
-
+// проверява дали два вектора са ортогонални
 bool Vector::ortogonalityCheck(Vector& v2) {
     Vector& v1 = *this;
     
