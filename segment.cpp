@@ -24,13 +24,16 @@ unsigned Segment::segLen(){
 }
 
 unsigned Segment::lenSeg(Vector& vect2,Point& pt2){
-    return sqrt(pow((vect2.getZ() - pt2.getZ()),2)
-    +pow((vect2.getX() - pt2.getX()),2)
-    +pow((vect2.getY() - pt2.getY()),2));
-    
+    return sqrt(pow((pt2.getZ() - vect2.getZ()),2)
+    +pow((pt2.getX() - vect2.getX()),2)
+    +pow((pt2.getY() - vect2.getY()),2));
 }
-//Vector::Vector(Point& p1, Point& p2) {
-//    this->x = p2.getX() - p1.getX();
-//    this->y = p2.getY() - p1.getY();
-//    this->z = p2.getZ() - p1.getZ();
-//}
+
+Point Segment::segMid(Vector& vect3 ,Point& pt3){
+    Point ptMid;
+    ptMid.setX((pt3.getX() + vect3.getX())/2);
+    ptMid.setY((pt3.getY() + vect3.getY())/2);
+    ptMid.setZ((pt3.getZ() + vect3.getZ())/2);
+    
+    return ptMid;
+}
