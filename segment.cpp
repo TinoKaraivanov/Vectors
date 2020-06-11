@@ -6,34 +6,68 @@ Segment::Segment() {
     this->y = 0;
     this->z = 0;
 }
-Segment::Segment(Point& pt1, Vector& vect1, double t){
-    if (t < 0 || t > 1){
+
+double Segment::getT() {
+    return this->t1;
+}
+double Segment::getX() {
+    return this->x;
+}
+double Segment::getY() {
+    return this->y;
+}
+double Segment::getZ() {
+    return this->z;
+}
+
+Segment::Segment(Point& pt1, Point pt2){
+//    if (t1 < 0 || t2 > 1){
+//        throw EXCEPTT();
+//    }
+    pst = pt1;
+    pend = pt2;
+    
+}
+
+Segment::Segment(Point& pt1, Vector& vect1, double t1, double t2){
+    if (t1 < 0 || t2 > 1){
         throw EXCEPTT();
     }
+    pst.setX(pt1.getX() + vect1.getX() * t1);
+    pst.setY(pt1.getY() + vect1.getY() * t1);
+    pst.setZ(pt1.getZ() + vect1.getZ() * t1);
     
-    this->x = pt1.getX() + vect1.getX() * t;
-    this->y = pt1.getY() + vect1.getY() * t;
-    this->z = pt1.getZ() + vect1.getZ() * t;
-    cout << "Segment: " << x << "\t" << y << "\t" << z << "\t" << endl;
+    pend.setX(pt1.getX() + vect1.getX() * t2);
+    pend.setY(pt1.getY() + vect1.getY() * t2);
+    pend.setZ(pt1.getZ() + vect1.getZ() * t2);
+    cout << "Initialized: " << pst << " / " << pend << endl;
 }
 
-unsigned Segment::segLen(){
-    return sqrt(pow((Vector::getZ() - Point::getZ()),2)
-    +pow((Vector::getX() - Point::getX()),2)
-    +pow((Vector::getY() - Point::getY()),2));
+Vector Segment::getVect(){
+    return this->Vect;
 }
 
-unsigned Segment::lenSeg(Vector& vect2,Point& pt2){
-    return sqrt(pow((pt2.getZ() - vect2.getZ()),2)
-    +pow((pt2.getX() - vect2.getX()),2)
-    +pow((pt2.getY() - vect2.getY()),2));
+double Segment::segLen(){
+    return sqrt(pow((pst.getZ() - pend.getZ()),2)
+    +pow((pst.getX() - pend.getX()),2)
+    +pow((pst.getY() - pend.getY()),2));
 }
 
-Point Segment::segMid(Vector& vect3 ,Point& pt3){
+
+
+Point Segment::segMid(){
     Point ptMid;
-    ptMid.setX((pt3.getX() + vect3.getX())/2);
-    ptMid.setY((pt3.getY() + vect3.getY())/2);
-    ptMid.setZ((pt3.getZ() + vect3.getZ())/2);
-    
+    ptMid.setX((pend.getX() + pst.getX())/2);
+    ptMid.setY((pend.getY() + pst.getY())/2);
+    ptMid.setZ((pend.getZ() + pst.getZ())/2);
+
     return ptMid;
+}
+
+
+bool Segment::operator ==(const Point &pC) {
+    Segment AC(pst, pC);
+    Segment BC(pend, pC);
+
+    return segLen() == AC.segLen() + BC.segLen();
 }
