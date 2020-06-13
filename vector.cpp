@@ -1,13 +1,11 @@
 #include "vector.hpp"
 #include "exceptions.hpp"
 
-
 Vector::Vector() {
     this->x = 0;
     this->y = 0;
     this->z = 0;
 }
-
 
 Vector::Vector(Point& p1, Point& p2) {
     this->x = p2.getX() - p1.getX();
@@ -15,13 +13,12 @@ Vector::Vector(Point& p1, Point& p2) {
     this->z = p2.getZ() - p1.getZ();
 }
 
-Vector::Vector
- (double x, double y, double z):Point(x,y,z) {
+Vector::Vector(double x, double y, double z):Point(x,y,z) {
+    if(this->isNull()){throw VLE();}
     this->x = x;
     this->y = y;
     this->z = z;
 }
-
 
 Vector::Vector(const Vector& v2) {
     Vector& v1 = *this;
@@ -31,17 +28,20 @@ Vector::Vector(const Vector& v2) {
     v1.z = v2.z;
 }
 
-
+double shortDistance(Vector& pt1, Vector& pt2, Vector& pt)
+{
+    Vector AB = pt2 - pt1;
+    Vector AC = pt - pt1;
+    
+    double area = Vector(AB^AC).magnitude();
+    return area / AB.magnitude();
+}
 
 //Operations
 //Addition
 Vector Vector::operator +(const Vector& v3) {
-    if(this->isNull() == true){
-        throw VLE();
-    }
-    if(v3.isNull() == true){
-        throw VLE();
-    }
+    if(this->isNull()){throw VLE();}
+    if(v3.isNull()){throw VLE();}
     Vector v1;
     Vector& v2 = *this;
 
@@ -49,7 +49,6 @@ Vector Vector::operator +(const Vector& v3) {
     v1.y = v2.y + v3.y;
     v1.z = v2.z + v3.z;
     return v1;
-    
 }
 
 //Substraction
@@ -63,8 +62,6 @@ Vector Vector::operator -(const Vector& v3) {
 
     return v1;
 }
-
-
 
 //Scalar multiplication
 Vector Vector::operator *(double a) {
@@ -113,9 +110,7 @@ double Vector::length() {
 }
 //Намиране на посока на Вектор
 Vector Vector::getDirection() {
-    if(this->isNull() == true){
-        throw VLE();
-    }
+    if(this->isNull()){throw VLE();}
     Vector& v1 = *this;
     double len = v1.length();
 
@@ -134,19 +129,14 @@ bool Vector::isNull() const {
 //проверява дали два вектора са паралелни
 bool Vector::paralellismCheck(Vector& v2) {
     Vector& v1 = *this;
-
-if(v2.isNull()||v1.isNull() == true){
-    throw VLE();
-}
+if(v2.isNull()||v1.isNull()){throw VLE();}
     return ((v1.x / v2.x) == (v1.y / v2.y) == (v1.z / v2.z));
 }
 // проверява дали два вектора са ортогонални
 bool Vector::ortogonalityCheck(Vector& v2) {
     Vector& v1 = *this;
     
-    if(v2.isNull()||v1.isNull() == true){
-        throw VLE();
-    }
+    if(v2.isNull()||v1.isNull()){throw VLE();}
     return (v1 * v2) == 0;
 }
 
@@ -155,3 +145,4 @@ std::ostream& operator <<(std::ostream& out, const Vector& v1) {
     out << '(' << v1.x << ',' << v1.y << ',' << v1.z << ')';
     return out;
 }
+
