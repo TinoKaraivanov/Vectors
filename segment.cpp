@@ -21,18 +21,13 @@ double Segment::getZ() {
 }
 
 Segment::Segment(Point& pt1, Point pt2){
-//    if (t1 < 0 || t2 > 1){
-//        throw EXCEPTT();
-//    }
     pst = pt1;
     pend = pt2;
     
 }
 
 Segment::Segment(Point& pt1, Vector& vect1, double t1, double t2){
-    if (t1 < 0 || t2 > 1){
-        throw EXCEPTT();
-    }
+    if (t1 < 0 || t2 > 1){throw SIE();}
     pst.setX(pt1.getX() + vect1.getX() * t1);
     pst.setY(pt1.getY() + vect1.getY() * t1);
     pst.setZ(pt1.getZ() + vect1.getZ() * t1);
@@ -68,6 +63,12 @@ Point Segment::segMid(){
 bool Segment::operator ==(const Point &pC) {
     Segment AC(pst, pC);
     Segment BC(pend, pC);
-
     return segLen() == AC.segLen() + BC.segLen();
+}
+
+istream& Segment::ext(ostream& in) const {
+}
+
+ostream& Segment::ins(ostream& out) const {
+    return out;
 }
