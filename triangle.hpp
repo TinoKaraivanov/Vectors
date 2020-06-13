@@ -6,19 +6,23 @@
 class Triangle : public Point{
 public:
     Triangle(Point&, Point&, Point&);
-    void checkTriangleType(Point&, Point&, Point&);
-    double poluPerimetar(Point&, Point&, Point&);
-    double areaTriangle(Point&, Point&, Point&);
-    double perimetar(Point&, Point&, Point&);
+    Triangle(double&, double&, double&);
+    void checkTriangleType();
+    double Perimetar();
+    double areaTriangle();
+    double poluPerimetar();
     double mX(Point&, Point&, Point&);
     double mY(Point&, Point&, Point&);
     double mZ(Point&, Point&, Point&);
     double mediCentar(Point&, Point&, Point&);
-    
+    double length(Point&, Point&);
+    void largestSide(double,double,double);
+    double maximum();
 private:
     Point firstPoint;
     Point secondPoint;
     Point thirdPoint;
-    unsigned longest;
+    double aLen,bLen,cLen;
+    double longest;
 };
 #endif // TRIANGLE_H
