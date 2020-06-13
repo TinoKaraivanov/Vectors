@@ -2,7 +2,7 @@
 
 #ifndef exceptions_hpp
 #define exceptions_hpp
-#include <iostream>
+#include "element.hpp"
 
 class VLE : public std::exception{
 public:
@@ -18,9 +18,9 @@ public:
     }
 };
 
-class EqualPointException : public std::exception{
+class EPE : public std::exception{
 public:
-    EqualPointException(int num1, int num2){
+    EPE(int num1, int num2){
         this->num1=num1;
         this->num2=num2;
     }
