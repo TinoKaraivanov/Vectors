@@ -7,23 +7,9 @@ Segment::Segment() {
     this->z = 0;
 }
 
-double Segment::getT() {
-    return this->t1;
-}
-double Segment::getX() {
-    return this->x;
-}
-double Segment::getY() {
-    return this->y;
-}
-double Segment::getZ() {
-    return this->z;
-}
-
 Segment::Segment(Point& pt1, Point pt2){
     pst = pt1;
     pend = pt2;
-    
 }
 
 Segment::Segment(Point& pt1, Vector& vect1, double t1, double t2){
@@ -36,10 +22,6 @@ Segment::Segment(Point& pt1, Vector& vect1, double t1, double t2){
     pend.setY(pt1.getY() + vect1.getY() * t2);
     pend.setZ(pt1.getZ() + vect1.getZ() * t2);
     cout << "Initialized: " << pst << " / " << pend << endl;
-}
-
-Vector Segment::getVect(){
-    return this->Vect;
 }
 
 double Segment::segLen(){
@@ -66,9 +48,9 @@ bool Segment::operator ==(const Point &pC) {
     return segLen() == AC.segLen() + BC.segLen();
 }
 
-istream& Segment::ext(ostream& in) const {
-}
-
-ostream& Segment::ins(ostream& out) const {
-    return out;
-}
+//istream& Segment::ext(ostream& in) const {
+//}
+//
+//ostream& Segment::ins(ostream& out) const {
+//    return out;
+//}
