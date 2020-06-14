@@ -6,36 +6,27 @@ class Line:public Vector{
 private:
     Point p1;
     Point p2;
+    Vector vect;
 public:
     Line();
-    Point LineStart();
-    Point LineEnd();
-    Line (Point& ,Vector& );
-    Line (Point& ,Point& );
+    Line (Point& ,Vector&);
+    Line (Point& ,Point&);
     double lenght(Point&, Point&);
-    Vector getDirection(Point&, Point&);
-    Vector normalVector(Line&, Point&);
-    
-    
-    //getters
-    double getX() {
-          return this->x;
-      }
-
-    double getY() {
-          return this->y;
-      }
-
-    double getZ() {
-          return this->z;
-      }
+    Vector getDirection();
+    Vector nmv();
+    Vector getVect();
+    Point getP1();
+    Point getP2();
+    double angle(Line&);
     
     bool lineParCheck(Line&);
     
     //overloading
-
+    bool operator +  (Point&);
     bool operator || (Line&);
-    
+    bool operator != (Line&);
+    bool operator |  (Line&);
+    bool operator && (Line&);
     
     
 };
