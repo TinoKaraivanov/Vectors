@@ -140,7 +140,6 @@ bool Vector::ortogonalityCheck(Vector& v2) {
     return (v1 * v2) == 0;
 }
 
-
 std::ostream& operator <<(std::ostream& out, const Vector& v1) {
     out << '(' << v1.x << ',' << v1.y << ',' << v1.z << ')';
     return out;
