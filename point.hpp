@@ -3,8 +3,6 @@
 #include "Libs.h"
 class Point
 {
-protected:
-    
 public:
     double x, y, z;
     Point();

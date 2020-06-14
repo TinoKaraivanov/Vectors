@@ -1,5 +1,4 @@
 #include "point.hpp"
-#include <iostream>
 
 Point::Point() {
     this->x = 0;
@@ -12,9 +11,6 @@ Point::Point(double x, double y, double z) {
     this->y = y;
     this->z = z;
 }
-
-
-
 //Getters
 double Point::getX() {
     return this->x;
