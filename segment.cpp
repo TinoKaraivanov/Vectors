@@ -49,6 +49,13 @@ bool Segment::operator ==(const Point &pC) {
     Segment BC(pend, pC);
     return segLen() == AC.segLen() + BC.segLen();
 }
+
+double Segment::operator *(Segment& s2)
+{
+    Segment& s1 = *this;
+    return ((s1.pst * s2.pst) + (s1.pend * s2.pend));
+}
+
 std::ostream& operator <<(std::ostream& out, const Segment& s1) {
     out <<'(' << s1.pst.x << ',' << s1.pst.y << ',' << s1.pst.z <<
         "),("<<s1.pend.x << ',' << s1.pend.y << ',' << s1.pend.z <<"),["

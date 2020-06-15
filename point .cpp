@@ -42,6 +42,12 @@ bool operator ==(Point p1, Point p2) {
     return (p1.x == p2.x) && (p1.y == p2.y) && (p1.z == p2.z);
 }
 
+double Point::operator *(Point& p2)
+{
+    Point& p1 = *this;
+    return ((p1.x * p2.x) + (p1.y * p2.y) + (p1.z * p2.z));
+}
+
     ostream& operator <<(ostream& out, Point p1) {
     out << '(' << p1.x << ',' << p1.y << ',' << p1.z << ')';
     return out;

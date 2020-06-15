@@ -27,6 +27,7 @@ public:
     double getZ();
     istream& ext(istream&)const;
     ostream& ins(ostream&)const;
+    double operator *(Segment&);
     friend std::ostream& operator <<(std::ostream&, const Segment&);
     friend istream& operator >> (istream&, Segment&);
 };

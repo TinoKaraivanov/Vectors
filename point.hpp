@@ -17,6 +17,7 @@ public:
     void setY(double);
     void setZ(double);
 
+    double operator *(Point& p2);
     friend bool operator ==(Point, Point);
     friend ostream& operator <<(std::ostream&, Point);
     friend istream& operator >> (istream&, Point&);
