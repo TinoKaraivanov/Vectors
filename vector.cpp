@@ -145,3 +145,7 @@ std::ostream& operator <<(std::ostream& out, const Vector& v1) {
     return out;
 }
 
+istream &operator >>( istream  &input, Vector& v ) {
+    input >> v.x >> v.y >> v.z;
+     return input;
+}

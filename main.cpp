@@ -1,5 +1,6 @@
 #include "triangle.hpp"
 #include "segment.hpp"
+
 int main(){
     Point pt1 (1,7,1);
     Point pt2 (2,6,4);
@@ -8,8 +9,9 @@ int main(){
     Triangle tr(pt1,pt2,pt3);
     Line l1 (pt1, v1);
     Line l2 (pt1,pt3);
-    cout << l1.angle(l2)<<endl;
-    
+    Line l3 (pt1,pt2);
+    Segment s1(pt1, v1, 1, 1);
+
     return 0;
 }
 

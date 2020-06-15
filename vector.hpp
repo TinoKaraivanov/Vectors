@@ -38,6 +38,7 @@ public:
 
 
     friend std::ostream& operator <<(std::ostream&, const Vector&);
+    friend std::istream& operator <<(std::istream&, Vector&);
 };
 
 #endif

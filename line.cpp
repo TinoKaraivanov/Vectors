@@ -5,21 +5,23 @@ Line::Line() {
     this->y = 0;
     this->z = 0;
 }
-//конструктор на линия, връща вектор
-Line::Line(Point& p1, Point& p2){
-    Vector v1(p1,p2);
+    //конструктор na liniq, vrushta vector
+Line::Line(Point& p1, Point& p2) {
+    Vector v1(p1, p2);
     this->x = p1.getX() + v1.getX();
     this->y = p1.getY() + v1.getY();
     this->z = p1.getZ() + v1.getZ();
-    cout << '(' << x << ',' << y << ',' << z << ')'<<endl;
- }
-
+}
+    //konstruktor na liniq
 Line::Line(Point& p1, Vector& v1) {
     this->x = p1.getX() + v1.getX();
     this->y = p1.getY() + v1.getY();
     this->z = p1.getZ() + v1.getZ();
-    vect= v1;
-    cout << '(' << x << ',' << y << ',' << z << ')'<<endl;
+    vect = v1;
+}
+Line::Line(Line& l1, Line& l2) {
+    this->p1 = l2.p1;
+    this->p2 = l2.p2;
 }
 
 Point Line::getP1(){
@@ -30,6 +32,7 @@ Point Line::getP1(){
     pt.setZ(l.getZ());
     return pt;
 }
+
 Point Line::getP2(){
     Line& l = *this;
     Point pt;
@@ -42,10 +45,20 @@ Vector Line::getVect(){
     Line& l = *this;
     return l.vect;
 }
-//намира посока на дължина, приема две точки и връща вектор успореден на линията
-Vector Line::getDirection() {
-    return getVect().getDirection();
+void Line::setP1(Point& point){
+     this -> p1 = point;
 }
+void Line::setP2(Point& point){
+     this -> p2 = point;
+}
+void Line::setVect(Vector& vector){
+     this -> p2 = vector;
+}
+    //namira posoka na liniq
+Vector Line::getDirection() {
+    return vect.getDirection();
+}
+    //za namirane na ugul mejdu dve pravi
 double Line::angle(Line& l2){
     Line& l1 = *this;
     Vector dir_vec_1 = l1.getVect();
@@ -61,6 +74,7 @@ double Line::angle(Line& l2){
     double angleRad = acos(cosOfAngle) * 180.0 / PI;
     return angleRad;
 }
+    //namirane na normalen vector - vrushta vector perpenikulqren na pravata
 Vector Line::nmv(){
     Line& l1 = *this;
     Vector dir_vec_1 = l1.getVect();
@@ -78,19 +92,20 @@ Vector Line::nmv(){
     Vector nmv(nmvX,nmvY,nmvZ);
     return nmv;
 }
-
+    //proverqva dali liniqta e usporedna
 bool Line::lineParCheck(Line& l2) {
     Line& l1 = *this;
     if (((l1.x / l2.x) == (l1.y / l2.y) == (l1.z / l2.z))) return true;
     else return false;
 }
-
+    //Operators
+    //za proverka dali dadena prava e usporedna na druga prava
 bool Line::operator || (Line& l2) {
     Line& l1 = *this;
     if(l1.lineParCheck(l2)) return true;
     else return false;
 }
-
+    //za proverka dali dadena tochka leji na dadena prava
 bool Line::operator +(Point& p){
     Line& l = *this;
     double x = l.getP1().x;
@@ -126,7 +141,7 @@ else{
     return false;
 }
 }
-
+    //za proverka dali prava suvpada s druga prava
 bool operator==( Line& l1,  Line& l2){
     Vector dir_vec_1 = l1.getVect();
     double dir_vec_x1 = dir_vec_1.getX();
@@ -151,7 +166,7 @@ bool operator==( Line& l1,  Line& l2){
         return false;
     }
 }
-
+    //za proverka dali prava presicha druga prava
 bool Line::operator &&(Line& l2){
     Line& l1 = *this;
     double x1 = l1.getX();
@@ -164,6 +179,7 @@ bool Line::operator &&(Line& l2){
     else return false;
     }
 
+    //za proverka dali prava e krustosana s druga prava
 bool Line::operator !=(Line& l2){
     Line& l1= *this;
  Point first = l2.getP1();
@@ -192,7 +208,7 @@ bool Line::operator !=(Line& l2){
     if(det != 0) return true;
         else return false;
 }
-
+    //za proverka dali prava e perpendikulqrna na druga pravaxs
 bool Line::operator |(Line& l2){
     Line l1 = *this;
     Vector dirVec1 = l1.getVect();
@@ -209,3 +225,12 @@ bool Line::operator |(Line& l2){
         else return false;
 }
 
+std::ostream& operator <<(std::ostream& out, Line& l1) {
+    
+    out << l1.getP1() <<','<< l1.getDirection();
+    return out;
+}
+ istream &operator>>( istream  &input, Line& l ) {
+     input >> l.p1 >> l.vect;
+     return input;
+}

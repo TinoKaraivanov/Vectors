@@ -7,7 +7,7 @@ public:
     double x, y, z;
     Point();
     Point(double, double, double);
-
+    
     //Getters
     double getX();
     double getY();
@@ -18,7 +18,8 @@ public:
     void setZ(double);
 
     friend bool operator ==(Point, Point);
-    friend std::ostream& operator <<(std::ostream&, Point);
+    friend ostream& operator <<(std::ostream&, Point);
+    friend istream& operator >> (istream&, Point&);
 };
 
 #endif

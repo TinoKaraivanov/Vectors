@@ -1,12 +1,13 @@
 #include "triangle.hpp"
+#include "exceptions.hpp"
 
+    //namirane na duljinata
 //d = ((x2 - x1)2 + (y2 - y1)2 + (z2 - z1)2)1/2
-
 double Triangle::length(Point& p1, Point& p2){
     return pow(pow(p2.getX() - p1.getX(),2) + pow(p2.getY() - p1.getY(),2) + pow(p2.getZ() - p1.getZ(),2),0.5);
    }
 
-///Êîíñòðóêòîð â êîéòî èìàìå ïðîâåðêà çà âàëèäíîñò íà òðèúãúëíèê.
+    //Constructor
 Triangle::Triangle(Point& firstPoint, Point& secondPoint, Point& thirdPoint){
     if(firstPoint.getX() == secondPoint.getX() && firstPoint.getY() == secondPoint.getZ()) throw EPE(1,2);
     if(firstPoint.getX() == thirdPoint.getX() && firstPoint.getY() == thirdPoint.getZ()) throw EPE(1,3);
@@ -14,12 +15,11 @@ Triangle::Triangle(Point& firstPoint, Point& secondPoint, Point& thirdPoint){
     this->firstPoint = firstPoint;
     this->secondPoint = secondPoint;
     this->thirdPoint = thirdPoint;
-    cout <<"Triangle with Points:  " << firstPoint << ',' << secondPoint << ',' << thirdPoint << endl;
     aLen = length(this->secondPoint, this->thirdPoint);
     bLen = length(this->firstPoint, this->thirdPoint);
     cLen = length(this->firstPoint, this->secondPoint);
 }
-
+    //Perimatar
 double Triangle::maximum() {
     Triangle& t1 = *this;
     double max = t1.aLen;
@@ -33,12 +33,19 @@ double Triangle::maximum() {
     return max;
 }
 
+    //Lice
 double Triangle::Perimetar()
 {
-    Triangle& t1 = *this;
-    return(t1.aLen + t1.bLen + t1.cLen);
+
+    return(aLen + bLen + cLen);
 }
-///Ìåòîä çà èç÷èñëåíèå íà ëèöå íà òðèúãúëíèê ïî Õåðîíîâà ôîðìóëà.
+    //Polupermitar
+double Triangle::poluPerimetar()
+{
+    Triangle& t1 = *this;
+    return (t1.Perimetar())/2;
+}
+    
 double Triangle::areaTriangle()
 {
     Triangle& t1 = *this;
@@ -46,51 +53,117 @@ double Triangle::areaTriangle()
     return sqrt(p*(p-aLen)*(p-bLen)*(p-cLen));
 }
 
-///Ìåòîä çà íàìèðàíå íà ïåðèìåòúðà íà òðèúãúëíèê a+b+c.
-double Triangle::poluPerimetar()
+string Triangle::sideType(Triangle& t1)
 {
-    Triangle& t1 = *this;
-    return (t1.Perimetar())/2;
+    if(aLen == bLen && bLen==cLen)
+    {
+        return "Ravnostranen\n";
+    }
+    else if(aLen==bLen || aLen==cLen || bLen==cLen)
+    {
+        return "Ravnobedren\n";
+    }
+    else{
+        return "Raznostranen\n";
+    }
 }
 
-///Ìåòîä çà íàìèðàíå íà ìåäèàíà 1.
-double Triangle::mX(Point& firstPoint, Point& secondPoint, Point& ThirdPoint)
+string Triangle::angleType(Triangle& t1)
 {
-    ///ôîðìóëà çà íàìèðàíå íà ìåäèàíà íà mX(mA).
-    return(sqrt(2*(ThirdPoint.getZ()*ThirdPoint.getZ())+2*(secondPoint.getY()*secondPoint.getY())-
-                (firstPoint.getX()*firstPoint.getX()))/2);
-}
-///Ìåòîä çà íàìèðàíå íà ìåäèàíà 2.
-double Triangle::mY(Point& firstPoint, Point& secondPoint, Point& ThirdPoint)
-{
-    ///ôîðìóëà çà íàìèðàíå íà ìåäèàíà íà mY(mB).
-    return (sqrt(2*(ThirdPoint.getZ()*ThirdPoint.getZ())+2*(firstPoint.getX()*firstPoint.getX())-
-                 (secondPoint.getY()*secondPoint.getY()))/2);
-}
-///Ìåòîä çà íàìèðàíå íà ìåäèàíà 3.
-double Triangle::mZ(Point& firstPoint, Point& secondPoint, Point& ThirdPoint)
-{
-    ///ôîðìóëà çà íàìèðàíå íà ìåäèàíà íà mZ(mC).
-    return(sqrt(2*(firstPoint.getX()*firstPoint.getX())+2*(secondPoint.getY()*secondPoint.getY())-
-                (ThirdPoint.getZ()*ThirdPoint.getZ()))/2);
-}
-///Ìåòîä çà íàìèðàíå íà ìåäèöåíòúð.
-double Triangle::mediCentar(Point& firstPoint, Point& secondPoint, Point& ThirdPoint)
-{
-
-    double m1 = mX(firstPoint, secondPoint, ThirdPoint);
-    double m2 = mY(firstPoint, secondPoint, ThirdPoint);
-    double m3 = mZ(firstPoint, secondPoint, ThirdPoint);
-
-    ///ôîðìóëà çà ìåäèöåíòúð.
-    return ((m1 + m2 + m3)/3);
-    /*((mX(Point& firstPoint, Point& secondPoint, Point& ThirdPoint) +
-    mY(Point& firstPoint, Point& secondPoint, Point& ThirdPoint) +
-    mZ(Point& firstPoint, Point& secondPoint, Point& ThirdPoint))/3);
-    */
+    if(aLen + bLen > cLen)
+    {
+        return "Ostrougulen\n";
+    }
+    else if(pow(aLen,2)+pow(bLen,2) == pow(cLen,2))
+    {
+        return "Pravougulen\n";
+    }
+    else{
+        return "Tupougulen\n";
+    }
 }
 
-//std::ostream& operator <<(std::ostream& out, const Triangle& p) {
-//    out << '(' << (firstpoint) << ',' << (secondpoint) << ',' << (thirdpoint) << ')';
-//    return out;
-//}
+void Triangle::triangleType(Triangle& t1)
+{
+        cout<< "Triugulnikut e: " << sideType(t1) << " i " << angleType(t1) <<endl;
+}
+    //namirane na medicentar
+Point Triangle::mediCentar(Triangle& t1)
+{
+    double a = (firstPoint.getX() + secondPoint.getX() + thirdPoint.getX())/3;
+    double b = (firstPoint.getY() + secondPoint.getY() + thirdPoint.getY())/3;
+    double c = (firstPoint.getZ() + secondPoint.getZ() + thirdPoint.getZ())/3;
+
+    return Point(a,b,c);
+}
+
+bool Triangle::operator <(Point& p)
+{
+    double A = ((secondPoint.getY() - thirdPoint.getY())*(p.getX()-thirdPoint.getX())+(thirdPoint.getX() - secondPoint.getX())*
+                (p.getY()-thirdPoint.getY())/(secondPoint.getY()-thirdPoint.getY())*(firstPoint.getX()-thirdPoint.getX())+
+                (thirdPoint.getX() - secondPoint.getX())*(firstPoint.getY()-thirdPoint.getY()));
+
+    double B = ((thirdPoint.getY()- firstPoint.getY())*(p.getX() - thirdPoint.getX())+(firstPoint.getX()-thirdPoint.getX())*
+                (p.getY()-thirdPoint.getY())/(secondPoint.getY()-thirdPoint.getY())*(firstPoint.getX()-thirdPoint.getX())+
+                (thirdPoint.getX()-secondPoint.getX())*(firstPoint.getY()-thirdPoint.getY()));
+
+    double C = 1.0 - A - B;
+
+    if((A > 0)&&(B>0)&&(C>0))
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+bool Triangle::operator>(Point& p)
+{
+    double A = ((secondPoint.getY()-thirdPoint.getY())*(p.getX()-thirdPoint.getX())+(thirdPoint.getX()-secondPoint.getX())*
+                (p.getY()-thirdPoint.getY())/((secondPoint.getY()-thirdPoint.getY())*(firstPoint.getX()-thirdPoint.getX())+
+                                              (thirdPoint.getX()-secondPoint.getX())*(firstPoint.getY()-thirdPoint.getY())));
+
+    double B = ((thirdPoint.getY()-firstPoint.getY())*(p.getX()-thirdPoint.getX())+(firstPoint.getX()-thirdPoint.getX())*
+                (p.getY()-thirdPoint.getY())/((secondPoint.getY()-thirdPoint.getY())*(firstPoint.getX()-thirdPoint.getX()))+
+                (thirdPoint.getX()-secondPoint.getX())*(firstPoint.getY()-thirdPoint.getY()));
+
+    double C = 1.0 - A - B;
+
+    if((A>0)&&(B>0)&&(C>0))
+    {
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+bool Triangle::operator==(Point& p)
+{
+    double A = ((secondPoint.getY()-thirdPoint.getY())*(p.getX()-thirdPoint.getX())+(thirdPoint.getX()-secondPoint.getX())*
+                (p.getY()-thirdPoint.getY())/((secondPoint.getY()-thirdPoint.getY())*(firstPoint.getX()-thirdPoint.getX())+
+                                              (thirdPoint.getX()-secondPoint.getX())*(firstPoint.getY()-thirdPoint.getY())));
+
+    double B = ((thirdPoint.getY()-firstPoint.getY())*(p.getX()-thirdPoint.getX())+(firstPoint.getX()-thirdPoint.getX())*
+                (p.getY()-thirdPoint.getY())/((secondPoint.getY()-thirdPoint.getY())*(firstPoint.getX()-thirdPoint.getX())+
+                                              (thirdPoint.getX()-secondPoint.getX())*(firstPoint.getY()-thirdPoint.getY())));
+
+    double C = 1.0 - A - B;
+
+    if((A==0)&&(B==0)&&(C==0))
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+ostream& operator <<(std::ostream& out,Triangle& tr) {
+    out << tr.firstPoint << ',' << tr.secondPoint << ',' << tr.thirdPoint;
+    return out;
+}
+ istream &operator>>( istream  &input, Triangle& tr ) {
+     input >> tr.firstPoint >> tr.secondPoint >> tr.thirdPoint;
+   return input;
+}

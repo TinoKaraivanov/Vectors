@@ -9,16 +9,18 @@ private:
     Vector vect;
 public:
     Line();
-    Line (Point& ,Vector&);
-    Line (Point& ,Point&);
-    double lenght(Point&, Point&);
+    Line(Point& ,Vector&);
+    Line(Point& ,Point&);
+    Line(Line& ,Line&);
     Vector getDirection();
     Vector nmv();
     Vector getVect();
     Point getP1();
     Point getP2();
+    void setP1(Point&);
+    void setP2(Point&);
+    void setVect(Vector&);
     double angle(Line&);
-    
     bool lineParCheck(Line&);
     
     //overloading
@@ -27,8 +29,9 @@ public:
     bool operator != (Line&);
     bool operator |  (Line&);
     bool operator && (Line&);
-    
-    
+    friend std::ostream& operator <<(std::ostream&, Line&);
+    friend istream& operator >> (istream&, Line&);
+
 };
     
 #endif
