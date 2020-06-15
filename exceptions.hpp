@@ -14,7 +14,7 @@ public:
 class SIE : public std::exception{
 public:
     const char * what(){
-        return " \"t\" interval must be between 0 and 1\n";
+        return "interval \"t\" must be between 0 and 1\n";
     }
 };
 
@@ -24,9 +24,9 @@ public:
         this->num1=num1;
         this->num2=num2;
     }
-    const char * pointsException (){
-        std::cout<<num1<< " " << num2;
-        return "Matching points";
+    const char * what(){
+        std::cout<<num1<< " " << num2 << " ";
+        return "Matching points ";
     }
 private:
     int num1;

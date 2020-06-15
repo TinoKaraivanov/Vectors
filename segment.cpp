@@ -2,9 +2,10 @@
 #include "exceptions.hpp"
 
 Segment::Segment() {
-    this->x = 0;
-    this->y = 0;
-    this->z = 0;
+    this->pst = Point(0,0,0);
+    this->pst = Point(0,0,0);
+    this-> t1 = 0;
+    this-> t2 = 1;
 }
     //Constructors
 Segment::Segment(Point& pt1, Point pt2){
@@ -12,7 +13,7 @@ Segment::Segment(Point& pt1, Point pt2){
     pend = pt2;
 }
 Segment::Segment(Point& pt1, Vector& vect1, double it1, double it2){
-    if (t1 < 0 || t2 > 1){throw SIE();}
+    if ((it1 < 0 || it2 > 1) || (it1 > 1 || it2 < 0)){throw SIE();}
     t1 = it1;
     t2 = it2;
     pst.setX(pt1.getX() + vect1.getX() * t1);

@@ -7,7 +7,6 @@ public:
     double x, y, z;
     Point();
     Point(double, double, double);
-    
     //Getters
     double getX();
     double getY();

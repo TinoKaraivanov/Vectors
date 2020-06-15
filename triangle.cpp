@@ -1,11 +1,8 @@
 #include "triangle.hpp"
 #include "exceptions.hpp"
 
-    //namirane na duljinata
 //d = ((x2 - x1)2 + (y2 - y1)2 + (z2 - z1)2)1/2
-double Triangle::length(Point& p1, Point& p2){
-    return pow(pow(p2.getX() - p1.getX(),2) + pow(p2.getY() - p1.getY(),2) + pow(p2.getZ() - p1.getZ(),2),0.5);
-   }
+Triangle::~Triangle(){}
 
     //Constructor
 Triangle::Triangle(Point& firstPoint, Point& secondPoint, Point& thirdPoint){
@@ -19,6 +16,11 @@ Triangle::Triangle(Point& firstPoint, Point& secondPoint, Point& thirdPoint){
     bLen = length(this->firstPoint, this->thirdPoint);
     cLen = length(this->firstPoint, this->secondPoint);
 }
+    //namirane na duljinata
+double Triangle::length(Point& p1, Point& p2){
+ return pow(pow(p2.getX() - p1.getX(),2) + pow(p2.getY() - p1.getY(),2) + pow(p2.getZ() - p1.getZ(),2),0.5);
+}
+
     //Perimatar
 double Triangle::maximum() {
     Triangle& t1 = *this;

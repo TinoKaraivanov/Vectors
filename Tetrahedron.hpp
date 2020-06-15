@@ -1,7 +1,7 @@
 #ifndef Tetrahedron_hpp
 #define Tetrahedron_hpp
-
 #include "segment.hpp"
+
 class Tetrahedron:public Point{    
 public:
 Point p1,p2,p3,p4;

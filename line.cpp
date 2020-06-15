@@ -41,7 +41,7 @@ Point Line::getP2(){
     pt.setZ(l.getZ());
     return pt;
 }
-Vector Line::getVect(){
+Vector& Line::getVect(){
     Line& l = *this;
     return l.vect;
 }

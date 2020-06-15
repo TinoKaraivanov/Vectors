@@ -14,7 +14,7 @@ public:
     Line(Line& ,Line&);
     Vector getDirection();
     Vector nmv();
-    Vector getVect();
+    Vector& getVect();
     Point getP1();
     Point getP2();
     void setP1(Point&);

@@ -11,6 +11,7 @@ public:
     string sideType(Triangle&);
     string angleType(Triangle&);
     Point mediCentar(Triangle&);
+    ~Triangle();
     void triangleType(Triangle&);
     double Perimetar();
     double areaTriangle();

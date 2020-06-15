@@ -7,7 +7,7 @@ Vector::Vector() {
     this->z = 0;
 }
 
-Vector::Vector(Point& p1, Point& p2) {
+Vector::Vector(Point& p1, Point& p2){
     this->x = p2.getX() - p1.getX();
     this->y = p2.getY() - p1.getY();
     this->z = p2.getZ() - p1.getZ();
@@ -30,6 +30,7 @@ Vector::Vector(const Vector& v2) {
 
 double shortDistance(Vector& pt1, Vector& pt2, Vector& pt)
 {
+    if(pt1.isNull()||pt2.isNull()||pt.isNull()){throw VLE();}
     Vector AB = pt2 - pt1;
     Vector AC = pt - pt1;
     
